@@ -139,6 +139,40 @@
   border-radius: 12px;
   box-shadow: 0 4px 10px rgba(0,0,0,0.15);
 }
+    
+.order-form {
+  max-width: 450px;
+  margin: 25px auto;
+  background-color: white;
+  padding: 25px;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.order-form input,
+.order-form select {
+  width: 100%;
+  padding: 12px;
+  margin: 10px 0;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+}
+
+.order-button {
+  width: 100%;
+  background-color: #4e342e;
+  color: white;
+  padding: 14px;
+  border: none;
+  border-radius: 25px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.order-button:hover {
+  background-color: #795548;
+}
+
 
     @media (max-width: 600px) {
       .hero h2 {
@@ -162,6 +196,7 @@
       <a href="#menu">Menu</a>
       <a href="#gallery">Gallery</a>
       <a href="#about">About</a>
+      <a href="#order">Order</a>
       <a href="#contact">Contact</a>
     </nav>
   </header>
@@ -221,6 +256,47 @@
       families enjoy fresh coffee, tasty food and wonderful moments.
     </p>
   </section>
+  
+<section id="order">
+  <h2>Place Your Order</h2>
+  <p>Choose your favourite treat from Sunrise Café!</p>
+
+  <form class="order-form" onsubmit="sendOrder(event)">
+
+    <input
+      type="text"
+      id="customerName"
+      placeholder="Your full name"
+      required>
+
+    <input
+      type="tel"
+      id="customerPhone"
+      placeholder="Your phone number"
+      required>
+
+    <select id="product" required>
+      <option value="">Choose a product</option>
+      <option value="Espresso Coffee">Espresso Coffee - KSh 250</option>
+      <option value="Fresh Juice">Fresh Juice - KSh 150</option>
+      <option value="Chocolate Cake">Chocolate Cake - KSh 200</option>
+    </select>
+
+    <input
+      type="number"
+      id="quantity"
+      placeholder="Quantity"
+      min="1"
+      value="1"
+      required>
+
+    <button type="submit" class="order-button">
+      Send Order on WhatsApp
+    </button>
+
+  </form>
+</section>
+
 
   <section id="contact">
     <h2>Contact Us</h2>
@@ -239,6 +315,33 @@
   <footer>
     <p>&copy; 2026 Sunrise Café. All rights reserved.</p>
   </footer>
+  
+<script>
+function sendOrder(event) {
+  event.preventDefault();
+
+  const name = document.getElementById("customerName").value;
+  const phone = document.getElementById("customerPhone").value;
+  const product = document.getElementById("product").value;
+  const quantity = document.getElementById("quantity").value;
+
+  const message =
+    "Hello Sunrise Cafe! I would like to place an order." +
+    "\nName: " + name +
+    "\nMy phone: " + phone +
+    "\nProduct: " + product +
+    "\nQuantity: " + quantity;
+
+  const whatsappNumber = "254712345678";
+
+  const whatsappLink =
+    "https://wa.me/" + whatsappNumber +
+    "?text=" + encodeURIComponent(message);
+
+  window.open(whatsappLink, "_blank");
+}
+</script>
+
 
 </body>
 </html>
