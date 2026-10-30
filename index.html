@@ -275,7 +275,7 @@
       placeholder="Your phone number"
       required>
 
-    <select id="product" required>
+    <select id="product" required onchange="calculateTotal()">
       <option value="">Choose a product</option>
       <option value="Espresso Coffee">Espresso Coffee - KSh 250</option>
       <option value="Fresh Juice">Fresh Juice - KSh 150</option>
@@ -283,13 +283,15 @@
     </select>
 
     <input
-      type="number"
-      id="quantity"
-      placeholder="Quantity"
-      min="1"
-      value="1"
-      required>
+  type="number"
+  id="quantity"
+  placeholder="Quantity"
+  min="1"
+  value="1"
+  required
+  oninput="calculateTotal()">
 
+<h3 id="totalPrice">Total: KSh 0</h3>
     <button type="submit" class="order-button">
       Send Order on WhatsApp
     </button>
@@ -316,21 +318,47 @@
     <p>&copy; 2026 Sunrise Café. All rights reserved.</p>
   </footer>
   
+
 <script>
+const prices = {
+  "Espresso Coffee": 250,
+  "Fresh Juice": 150,
+  "Chocolate Cake": 200
+};
+
+function calculateTotal() {
+  const product = document.getElementById("product").value;
+  const quantity = Number(document.getElementById("quantity").value);
+
+  const price = prices[product] || 0;
+  const total = price * quantity;
+
+  document.getElementById("totalPrice").textContent =
+    "Total: KSh " + total;
+}
+
 function sendOrder(event) {
   event.preventDefault();
 
   const name = document.getElementById("customerName").value;
   const phone = document.getElementById("customerPhone").value;
   const product = document.getElementById("product").value;
-  const quantity = document.getElementById("quantity").value;
+  const quantity = Number(document.getElementById("quantity").value);
+
+  if (!prices[product] || quantity < 1 || !Number.isInteger(quantity)) {
+    alert("Please choose a product and enter a valid quantity.");
+    return;
+  }
+
+  const total = prices[product] * quantity;
 
   const message =
     "Hello Sunrise Cafe! I would like to place an order." +
     "\nName: " + name +
     "\nMy phone: " + phone +
     "\nProduct: " + product +
-    "\nQuantity: " + quantity;
+    "\nQuantity: " + quantity +
+    "\nTotal: KSh " + total;
 
   const whatsappNumber = "254712345678";
 
