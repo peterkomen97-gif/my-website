@@ -125,6 +125,20 @@
       text-align: center;
       padding: 20px;
     }
+    .gallery-container {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.gallery-container img {
+  width: 280px;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+}
 
     @media (max-width: 600px) {
       .hero h2 {
@@ -155,7 +169,25 @@
     <h2>Welcome to Sunrise Café</h2>
     <p>Fresh Coffee, Delicious Food and Great Moments.</p>
     <a href="#menu" class="menu-button">View Menu</a>
+    <a href="#gallery">Gallery</a>
   </section>
+  <section id="gallery">
+  <h2>Our Café Gallery</h2>
+  <p>Enjoy a look at our delicious treats and coffee.</p>
+
+  <div class="gallery-container">
+
+    <img src="https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=600"
+         alt="Fresh coffee">
+
+    <img src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=600"
+         alt="Chocolate cake">
+
+    <img src="https://images.unsplash.com/photo-1445116572660-236099ec97a0?w=600"
+         alt="Beautiful café interior">
+
+  </div>
+</section>
 
   <section id="menu">
     <h2>Our Menu</h2>
